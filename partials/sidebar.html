@@ -1,0 +1,48 @@
+<div class="page-sidebar nav-collapse collapse" ng-controller="SidebarCtrl">
+  <!-- BEGIN SIDEBAR MENU -->
+  <ul style="overflow: hidden; width: auto; height: 319px;" class="page-sidebar-menu">
+    <li>
+      <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+      <div class="sidebar-toggler hidden-phone">
+      </div>
+      <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+    </li>
+    <li>
+      <!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
+      <form class="sidebar-search">
+        <div class="input-box">
+          <a href="javascript:;" class="remove"></a>
+          <input placeholder="Search..." type="text">
+          <input class="submit" value=" " type="button">
+        </div>
+      </form>
+      <!-- END RESPONSIVE QUICK SEARCH FORM -->
+    </li>
+    <li ng-repeat="child1 in sideBar" ng-class="{'start active': $index == 0, 'last': $index == sideBar.length, 'open': child1.children}">
+      <a href="{{child1.routeUrl}}">
+        <i class="{{child1.icon}}"></i>
+        <span class="title" ng-bind="child1.name"></span>
+        <span class="" ng-class="{'selected': $index == 0, 'arrow': child1.children}"></span>
+      </a>
+      <ul class="sub-menu" ng-class="{'hide': child1.children}">
+        <li ng-repeat="child2 in child1.children">
+          <a ng-href="{{child2.routeUrl}}">
+            <i class="{{child2.icon}}"></i>
+            {{ child2.name }}
+            <span class="" ng-class="{'arrow': child2.children}"></span>
+            <ul class="sub-menu">
+              <li ng-repeat="child3 in child2.children">
+                <a href="javascript:;">
+                  <i class="icon-cogs"></i>
+                  {{ child3.name }}
+                  <span class="" ng-class="{'arrow': child3.children}"></span>
+                </a>
+              </li>
+            </ul>
+          </a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+  <!-- END SIDEBAR MENU -->
+</div>

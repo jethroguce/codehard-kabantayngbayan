@@ -1,0 +1,17 @@
+<!doctype html>
+<html ng-app>
+  <head>
+  <script src="jquery-1.10.2.min.js"></script>
+	<script src="highcharts.js"></script>
+	<script src="angular.min.js"></script>
+	<script src="taxallocationcontrollers.js"></script>
+  </head>
+  <body>
+
+    <div ng-controller="taxAllocationCtrl">
+        Total Tax: <input type="number" ng-model="TotalTax2">
+    </div>
+    <div id="mainchart" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+    <div id="dtlchart" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+  </body>
+</html>

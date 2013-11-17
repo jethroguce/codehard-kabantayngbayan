@@ -1,0 +1,26 @@
+<div class="row-fluid">
+  <div class="span12">
+    <h3 class="page-title">
+      Tax Allocation
+      <small>tax allocation based on total tax</small>
+    </h3>
+  </div>
+</div>
+<hr />
+<div class="row-fluid">
+  <div class="span12">
+    <div class="control-group">
+      <label class="control-label">Total Tax:</label>
+      <div class="controls">
+        <input type="number" class="m-wrap medium" maxlength="10" min="0" ng-model="TotalTax">
+        <span class="help-inline"></span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row-fluid" ng-cloak ng-hide="TotalTax == undefined || TotalTax == 0">
+  <div class="span12">
+    <div id="mainchart" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+    <div id="dtlchart" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+  </div>
+</div>

@@ -1,0 +1,283 @@
+<div class="row-fluid">
+  <div class="span12">
+    <h3 class="page-title">
+      Tax Calculator
+      <small>compute tax based on my salary</small>
+    </h3>
+  </div>
+</div>
+<hr />
+<div class="row-fluid">
+  <div class="span12">
+    <div class="portlet box blue">
+      <div class="portlet-title">
+        <div class="caption"><i class="icon-reorder"></i>Compute Tax</div>
+        <div class="tools">
+          <a href="javascript:;" class="collapse"></a>
+        </div>
+      </div>
+      <div class="portlet-body form">
+        <!-- BEGIN FORM-->
+        <form action="#" class="form-horizontal form-row-seperated">
+          <div class="control-group">
+            <label class="control-label">Current Monthly Salary</label>
+            <div class="controls">
+              <input type="number" class="m-wrap medium" maxlength="10" min="0" ng-model="nnrate" />
+              <span class="help-inline"></span>
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label">Pay Frequency</label>
+            <div class="controls">
+              <select id="mypayfreq" ng-model="selected.payfreq" ng-options="s.payfreq for s in dictpayfreq"></select>
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label">Tax Status</label>
+            <div class="controls">
+              <select id="mytaxstatus" class="m-wrap medium" ng-model="selected.taxstatus" ng-options="s.taxstatus for s in dicttaxstatus"></select>
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label">Remaining Payout</label>
+            <div class="controls">
+              <input type="number" class="m-wrap medium" maxlength="10" min="1" max="24" ng-model="nrempayperiod">
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label">Year to Date Income</label>
+            <div class="controls">
+              <input type="number" class="m-wrap medium" maxlength="10" min="0" ng-model="nytdtax1">
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label">Year to Date Bonus Income</label>
+            <div class="controls">
+              <input type="number" class="m-wrap medium" maxlength="10" min="0" ng-model="nytdtax3">
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label">Year to Date Tax Deductible</label>
+            <div class="controls">
+              <input type="number" class="m-wrap medium" maxlength="10" min="0" ng-model="nytddeduct">
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label">Year to Date Witholding Tax</label>
+            <div class="controls">
+              <input type="number" class="m-wrap medium" maxlength="10" min="0" ng-model="nytdwtax">
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label">Current Income</label>
+            <div class="controls">
+              <input type="number" class="m-wrap medium" maxlength="10" min="0" ng-model="ncurrtax1">
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label">Current Additional Income</label>
+            <div class="controls">
+              <input type="number" class="m-wrap medium" maxlength="10" min="0" ng-model="ncurrtax2">
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label">Current Bonus Income</label>
+            <div class="controls">
+              <input type="number" class="m-wrap medium" maxlength="10" min="0" ng-model="ncurrtax3">
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label">Current Tax Deductible</label>
+            <div class="controls">
+              <input type="number" class="m-wrap medium" maxlength="10" min="0" ng-model="ncurrdeduct">
+            </div>
+          </div>
+          <div class="form-actions">
+            <button type="button" class="btn blue" ng-click="showTaxComputation = true">
+              <i class="icon-credit-card"></i>
+              Compute
+            </button>
+            <button type="reset" class="btn" ng-click="showTaxComputation = false">Reset</button>
+          </div>
+        </form>
+        <!-- END FORM-->  
+      </div>
+    </div>
+    
+    <div class="portlet box green" ng-cloak ng-show="showTaxComputation">
+      <div class="portlet-title">
+        <div class="caption"><i class="icon-reorder"></i>Tax Computation</div>
+        <div class="tools">
+          <a href="javascript:;" class="collapse"></a>
+        </div>
+      </div>
+      <div class="portlet-body form">
+        <!-- BEGIN FORM-->
+        <div class="form-horizontal form-view">
+          <div class="row-fluid">
+            <div class="span12">
+              <div class="control-group">
+                <label class="control-label">Total Income for the Year</label>
+                <div class="controls">
+                  <span class="text" ng-bind="varTaxInc2 | currency:'&#8369;'"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row-fluid">
+            <div class="span12">
+              <div class="control-group">
+                <label class="control-label">Projected Income for the Year</label>
+                <div class="controls">
+                  <span class="text" ng-bind="varProj | currency:'&#8369;'"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row-fluid">
+            <div class="span12">
+              <div class="control-group">
+                <label class="control-label">Total Tax Deductibles for the Year</label>
+                <div class="controls">
+                  <span class="text" ng-bind="varDeduct | currency:'&#8369;'"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row-fluid">
+            <div class="span12">
+              <div class="control-group">
+                <label class="control-label">Tax Bonus</label>
+                <div class="controls">
+                  <span class="text" ng-bind="ntaxbonus | currency:'&#8369;'"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row-fluid">
+            <div class="span12">
+              <div class="control-group">
+                <label class="control-label">Total Taxable Income for the Year</label>
+                <div class="controls">
+                  <span class="text" ng-bind="varTotalInc2 | currency:'&#8369;'"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row-fluid">
+            <div class="span12">
+              <div class="control-group">
+                <label class="control-label">Personal Exemption</label>
+                <div class="controls">
+                  <span class="text" ng-bind="varExempt | currency:'&#8369;'"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row-fluid">
+            <div class="span12">
+              <div class="control-group">
+                <label class="control-label">Net of Statutories and Personal Exemption</label>
+                <div class="controls">
+                  <span class="text" ng-bind="varTotalIncome2 | currency:'&#8369;'"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row-fluid">
+            <div class="span12">
+              <div class="control-group">
+                <label class="control-label">Tax Bracket</label>
+                <div class="controls">
+                  <span class="text" ng-bind="varTaxBracket2 | currency:'&#8369;'"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row-fluid">
+            <div class="span12">
+              <div class="control-group">
+                <label class="control-label">Excess Taxable Income from Tax Bracket</label>
+                <div class="controls">
+                  <span class="text" ng-bind="varExcessTax2 | currency:'&#8369;'"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row-fluid">
+            <div class="span12">
+              <div class="control-group">
+                <label class="control-label">Tax Rate Multiplier</label>
+                <div class="controls">
+                  <span class="text" ng-bind="varTaxRate2"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row-fluid">
+            <div class="span12">
+              <div class="control-group">
+                <label class="control-label">Tax Base</label>
+                <div class="controls">
+                  <span class="text" ng-bind="varTaxBase2 | currency:'&#8369;'"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row-fluid">
+            <div class="span12 label label-important">
+              <div class="control-group">
+                <label class="control-label">Total Tax Due</label>
+                <div class="controls">
+                  <span class="text" ng-bind="varTotalTax2 | currency:'&#8369;'"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row-fluid">
+            <div class="span12">
+              <div class="control-group">
+                <label class="control-label">Witholding Tax</label>
+                <div class="controls">
+                  <span class="text" ng-bind="varwtax | currency:'&#8369;'"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button type="button" class="btn yellow" ng-click="showTaxAllocation(varTotalTax2)">
+              Show me where my tax go
+              <i class="icon-circle-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+        <!-- END FORM-->  
+      </div>
+    </div>
+    <!--
+    <div id="mainchart" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+    <div id="dtlchart" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+    
+    
+    <div id="taxallocation" class="modal hide fade" tabindex="-1" data-width="760">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+        <h3>Tax Allocation of  {{varTotalTax2 | currency:'&#8369;'}}</h3>
+      </div>
+      <div class="modal-body">
+        <div class="scroller" style="height:300px" data-always-visible="1" data-rail-visible1="1">
+          <div class="row-fluid">
+            <div class="span12">
+              
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" data-dismiss="modal" class="btn">Close</button>
+        <button type="button" class="btn blue">OK</button>
+      </div>
+    </div>
+    -->
+  </div>
+</div>

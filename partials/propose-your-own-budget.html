@@ -1,0 +1,59 @@
+<div class="row-fluid">
+  <div class="span12">
+    <h3 class="page-title">
+      Propose Your Own Budget
+      <small>divide and allocate the national budget for the operations and projects of the whole government</small>
+    </h3>
+  </div>
+</div>
+<hr />
+<div class="row-fluid">
+<div class="span12">
+  
+    <div class="portlet box red">
+      <div class="portlet-title">
+        <div class="caption"><i class="icon-bar-chart"></i>Propose Budget</div>
+        <div class="tools">
+          <a href="javascript:;" class="collapse"></a>
+        </div>
+      </div>
+      <div class="portlet-body">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th rowspan="2" valign="middle">Sector</th>
+              <th colspan="2">By Government</th>
+              <th colspan="2">By You</th>
+            </tr>
+            <tr>
+              <th>Amount</th>
+              <th>Percentage</th>
+              <th>Amount</th>
+              <th>Percentage</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="sector in sectorList">
+              <td ng-bind="sector.sect"></td>
+              <td ng-bind="sector.current_amt | currency:'&#8369;'"></td>
+              <td ng-bind="sector.current_percentage"></td>
+              <td>
+                <input type="number" class="m-wrap small" min="0" maxlength="100" ng-model="sector.proposed.amt"  ng-change="calculateAllocation()" />
+              </td>
+              <td>
+                <input type="number" class="m-wrap small" min="0" max="100" maxlength="3" ng-model="sector.proposed.percentage" />
+              </td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr style='background-color: #57b5e3; font-weight: bold;'>
+              <td colspan="3">Unallocated</td>
+              <td ng-bind="unallocated.amount"></td>
+              <td ng-bind="unallocated.percentage"></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+  
+</div>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js" ng-app="KabantayNgBayan"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js" ng-app="KabantayNgBayan"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en" class="no-js" ng-app="KabantayNgBayan">
+<!--<![endif]-->
+  <!-- BEGIN HEAD -->
+  <head>
+    <meta charset="utf-8">
+    <title>KabantayNgBayan</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="description">
+    <meta content="" name="author">
+    
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="assets/plugins/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css">
+    <link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="assets/css/style-metro.css" rel="stylesheet" type="text/css">
+    <link href="assets/css/style.css" rel="stylesheet" type="text/css">
+    <link href="assets/css/style-responsive.css" rel="stylesheet" type="text/css">
+    <link href="assets/css/themes/light.css" rel="stylesheet" type="text/css" id="style_color">
+    <!-- END GLOBAL MANDATORY STYLES -->
+    
+    <!-- BEGIN PAGE LEVEL PLUGIN STYLES -->
+    <!-- END PAGE LEVEL PLUGIN STYLES -->
+    
+    <!-- BEGIN PAGE LEVEL STYLES -->
+    <!-- END PAGE LEVEL STYLES -->
+    <style type="text/css">
+      .dropdown-submenu:hover>.dropdown-menu{
+        display:none
+      }
+    </style>
+  </head>
+  <!-- END HEAD -->
+  <!-- BEGIN BODY -->
+  <body class="page-boxed page-header-fixed page-sidebar-fixed page-footer-fixed" style="" ng-controller="MainCtrl">
+    <!-- BEGIN HEADER -->
+    
+    <div class="header navbar navbar-inverse navbar-fixed-top">
+      <!-- BEGIN TOP NAVIGATION BAR -->
+      <div class="navbar-inner">
+        <div class="container">
+          <!-- BEGIN LOGO -->
+          <a class="brand" href="index.html" style="font-weight: normal;">
+            #KabantayNgBayan
+            <!--
+            <span style="color: #0362fd;">Kabantay</span>
+            <span style="color: #ffb848;">Ng</span>
+            <span style="color: #d84a38;">Bayan</span>
+            -->
+          </a>
+          <!-- END LOGO -->
+          <!-- BEGIN RESPONSIVE MENU TOGGLER -->
+          <a href="javascript:;" class="btn-navbar collapsed" data-toggle="collapse" data-target=".nav-collapse">
+            <img src="assets/img/menu-toggler.png" alt="">
+          </a>
+          
+          <!-- END RESPONSIVE MENU TOGGLER -->
+          
+          <!-- BEGIN TOP NAVIGATION MENU -->
+          
+          <!-- END TOP NAVIGATION MENU -->
+        
+        </div>
+      </div>
+      <!-- END TOP NAVIGATION BAR -->
+    </div>
+    
+    <div class="container">
+      <div class="page-container">
+        <!-- BEGIN SIDEBAR -->
+        <div class="page-sidebar nav-collapse collapse">
+          <!-- BEGIN SIDEBAR MENU -->
+          <ul style="overflow: hidden; width: auto; height: 319px;" class="page-sidebar-menu" ng-controller="SidebarCtrl">
+            <li class="margin-bottom-10">
+              <div class="sidebar-toggler hidden-phone"></div>
+            </li>
+            <li ng-repeat="child1 in sideBar" ng-class="{'start active': $index == 0, 'last': $index == sideBar.length, 'open': child1.children}">
+              <a href="{{child1.routeUrl}}">
+                <i class="{{child1.icon}}"></i>
+                <span class="title" ng-bind="child1.name"></span>
+                <span class="" ng-class="{'selected': $index == 0, 'arrow': child1.children}"></span>
+              </a>
+              <ul class="sub-menu hide" ng-class="{'hide': child1.children}" ng-cloak>
+                <li ng-repeat="child2 in child1.children">
+                  <a ng-href="{{child2.routeUrl}}">
+                    <i class="{{child2.icon}}"></i>
+                    {{ child2.name }}
+                    <span class="" ng-class="{'arrow': child2.children}"></span>
+                    <ul class="sub-menu">
+                      <li ng-repeat="child3 in child2.children">
+                        <a href="javascript:;">
+                          <i class="icon-cogs"></i>
+                          {{ child3.name }}
+                          <span class="" ng-class="{'arrow': child3.children}"></span>
+                        </a>
+                      </li>
+                    </ul>
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <!-- END SIDEBAR MENU -->
+        </div>
+        <!-- END SIDEBAR -->
+        <!-- BEGIN PAGE -->
+        <div style="min-height:608px !important" class="page-content">
+          <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+          <div id="portlet-config" class="modal hide">
+            <div class="modal-header">
+              <button data-dismiss="modal" class="close" type="button"></button>
+              <h3>Widget Settings</h3>
+            </div>
+            <div class="modal-body">
+              Widget settings form goes here
+            </div>
+          </div>
+          <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+          <!-- BEGIN PAGE CONTAINER-->
+          <div class="container-fluid" ng-controller="contentCtrl">
+            <div ng-view></div>
+          </div>
+          <!-- END PAGE CONTAINER-->
+          
+        </div>
+        <!-- END PAGE -->
+      </div>
+    </div>
+    
+    <div ng-include="'partials/footer.html'"></div>
+    <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
+    <!-- BEGIN CORE PLUGINS -->
+    <script src="js/jquery-1.10.2.min.js" type="text/javascript"></script>
+    <!-- IMPORTANT! Load jquery-ui-1.10.2.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
+    <script src="js/jquery-ui-1.10.2.custom.min.js" type="text/javascript"></script>
+    <script src="assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="js/highcharts.js" type="text/javascript"></script>
+    <!--[if lt IE 9]>
+    <script src="assets/plugins/excanvas.min.js"></script>
+    <script src="assets/plugins/respond.min.js"></script>
+    <![endif]-->
+    
+    <script src="assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+    <!-- END CORE PLUGINS -->
+    
+    <script type="text/javascript" language="javascript" src="js/angular.min.js"></script>
+    <script type="text/javascript" language="javascript" src="js/ui-bootstrap-tpls-0.6.0.min.js"></script>
+    <script type="text/javascript" language="javascript" src="js/angular-resource.min.js"></script>
+    <script type="text/javascript" language="javascript" src="js/app.js"></script>
+    <script type="text/javascript" language="javascript" src="js/controllers.js"></script>
+    <script type="text/javascript" language="javascript" src="js/budgetallocationcontrollers.js"></script>
+    <script type="text/javascript" language="javascript" src="js/budgetwatchcontrollers.js"></script>
+    <script type="text/javascript" language="javascript" src="js/taxallocationcontrollers.js"></script>
+    <script type="text/javascript" language="javascript" src="js/taxcalculatorcontrollers.js"></script>
+    <script type="text/javascript" language="javascript" src="js/proposebudgetcontrollers.js"></script>
+    <script type="text/javascript" language="javascript" src="js/services.js"></script>
+    
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    <!-- END PAGE LEVEL PLUGINS -->
+    
+    <!-- BEGIN PAGE LEVEL SCRIPTS -->
+    <script src="assets/scripts/app.js" type="text/javascript"></script>
+    <script src="assets/scripts/index.js" type="text/javascript"></script>
+    <!-- END PAGE LEVEL SCRIPTS -->
+    
+    <script>
+      jQuery(document).ready(function() {
+        //App.init();
+        //Index.init();
+      });
+    </script>
+    <!-- END JAVASCRIPTS -->
+    
+  <!-- END BODY -->
+  </body>
+</html>
